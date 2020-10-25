@@ -11,9 +11,9 @@ void prepareIds();
 boolean connectWifi();
 boolean connectUDP();
 void startHttpServer();
-void turnOnRelay();
-void turnOffRelay();
-void sendRelayState();
+void turnOnState();
+void turnOffState();
+void sendStateToAlexa();
 
 const char* ssid = "****";  // CHANGE: Wifi name
 const char* password = "****";  // CHANGE: Wifi password 
@@ -221,18 +221,18 @@ void startHttpServer() {
       if(request.indexOf("SetBinaryState") >= 0) {
         if(request.indexOf("<BinaryState>1</BinaryState>") >= 0) {
             Serial.println("Got Turn on request");
-            turnOnRelay();
+            turnOnState();
         }
   
         if(request.indexOf("<BinaryState>0</BinaryState>") >= 0) {
             Serial.println("Got Turn off request");
-            turnOffRelay();
+            turnOffState();
         }
       }
 
       if(request.indexOf("GetBinaryState") >= 0) {
         Serial.println("Got binary state request");
-        sendRelayState();
+        sendStateToAlexa();
       }
             
       HTTP.send(200, "text/plain", "");
@@ -326,13 +326,13 @@ void startHttpServer() {
     HTTP.on("/on.html", HTTP_GET, [](){
          Serial.println("Got Turn on request");
          HTTP.send(200, "text/plain", "turned on");
-         turnOnRelay();
+         turnOnState();
        });
  
      HTTP.on("/off.html", HTTP_GET, [](){
         Serial.println("Got Turn off request");
         HTTP.send(200, "text/plain", "turned off");
-        turnOffRelay();
+        turnOffState();
        });
  
       HTTP.on("/status.html", HTTP_GET, [](){
@@ -406,7 +406,7 @@ boolean connectUDP(){
 }
 
 
-void turnOnRelay() {
+void turnOnState() {
 
   Serial.println("turnOnRelay");
   client.publish(mqttTopic,"{'cmd':'fx','payload':'1'}");
@@ -429,7 +429,7 @@ void turnOnRelay() {
   Serial.println(body);
 }
 
-void turnOffRelay() {
+void turnOffState() {
   
   Serial.println("turnOffRelay");
   client.publish(mqttTopic, "{'cmd':'off','payload':''}");
@@ -451,7 +451,7 @@ void turnOffRelay() {
   Serial.println(body);
 }
 
-void sendRelayState() {
+void sendStateToAlexa() {
   
   String body = 
       "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body>\r\n"
