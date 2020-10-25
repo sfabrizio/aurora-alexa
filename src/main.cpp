@@ -6,7 +6,6 @@
 #include <PubSubClient.h>
 
 
-
 void prepareIds();
 boolean connectWifi();
 boolean connectUDP();
@@ -19,6 +18,7 @@ const char* ssid = "****";  // CHANGE: Wifi name
 const char* password = "****";  // CHANGE: Wifi password 
 String friendlyName = "aurora";        // CHANGE: Alexa device name
 const char* mqttTopic = "myhome";        // CHANGE: Topic to publish on over mqtt
+boolean debugRequests = false;
 
 
 WiFiUDP UDP;
@@ -215,8 +215,10 @@ void startHttpServer() {
       Serial.println("########## Responding to  /upnp/control/basicevent1 ... ##########");      
   
       String request = HTTP.arg(0);      
-      Serial.print("request:");
-      Serial.println(request);
+      if(debugRequests){
+        Serial.print("request:");
+        Serial.println(request);
+      }
  
       if(request.indexOf("SetBinaryState") >= 0) {
         if(request.indexOf("<BinaryState>1</BinaryState>") >= 0) {
@@ -317,9 +319,10 @@ void startHttpServer() {
             "\r\n";
             
         HTTP.send(200, "text/xml", setup_xml.c_str());
-        
-        Serial.print("Sending :");
-        Serial.println(setup_xml);
+        if (debugRequests) {
+          Serial.print("Sending :");
+          Serial.println(setup_xml);
+        }
     });
 
     // openHAB support
@@ -408,7 +411,7 @@ boolean connectUDP(){
 
 void turnOnState() {
 
-  Serial.println("turnOnRelay");
+  Serial.println("turn On state");
   client.publish(mqttTopic,"{'cmd':'fx','payload':'1'}");
   client.publish(mqttTopic,"{'cmd':'spd','payload':'255'}");
   
@@ -424,14 +427,15 @@ void turnOnState() {
       "</s:Body> </s:Envelope>";
 
   HTTP.send(200, "text/xml", body.c_str());
-        
-  Serial.print("Sending :");
-  Serial.println(body);
+  if (debugRequests) {
+    Serial.print("Sending :");
+    Serial.println(body);
+  }
 }
 
 void turnOffState() {
   
-  Serial.println("turnOffRelay");
+  Serial.println("turn Off state");
   client.publish(mqttTopic, "{'cmd':'off','payload':''}");
   
   digitalWrite(LED_BUILTIN, HIGH);  // Turn off LED
@@ -446,9 +450,10 @@ void turnOffState() {
       "</s:Body> </s:Envelope>";
 
   HTTP.send(200, "text/xml", body.c_str());
-        
-  Serial.print("Sending :");
-  Serial.println(body);
+  if (debugRequests) {     
+    Serial.print("Sending :");
+    Serial.println(body);
+  }
 }
 
 void sendStateToAlexa() {
