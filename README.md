@@ -1,11 +1,13 @@
 # Aurora Alexa
 
-ESP8266 Client over mqtt for turn on/off all your (https://github.com/garhul/aurora)[aurora] devices with Alexa.
+ESP8266 Client over mqtt for turn on/off all your [aurora](https://github.com/garhul/aurora) devices with Alexa.
 
 
 ## Install
 
-This project is done on platformio, so it's just a simple upload of the project. 
+This project is done on [platformio](https://platformio.org/), Follow the doc in there it's pretty straifoward.
+
+With Platformio working is just a simple build & upload of the project. 
 Just make sure to change config values to your in 'main.cpp'
 
 
