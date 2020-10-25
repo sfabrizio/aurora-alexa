@@ -14,13 +14,14 @@ void turnOnState();
 void turnOffState();
 void sendStateToAlexa();
 
-const char* ssid = "****";  // CHANGE: Wifi name
-const char* password = "****";  // CHANGE: Wifi password 
-String friendlyName = "aurora";        // CHANGE: Alexa device name
-const char* mqttTopic = "myhome";        // CHANGE: Topic to publish on over mqtt
+const char* ssid = "******";               // CHANGE: Wifi name
+const char* password = "********";         // CHANGE: Wifi password
+String friendlyName = "aurora";            // CHANGE: Name to show in Alexa
+const char* mqtt_server = "192.168.1.200"; // CHANGE: IP of you mqtt broker
+const char* mqttTopic = "myhome";          // CHANGE: Topic to publish on over mqtt
+
 boolean debugRequests = false;
-
-
+// alexa defs
 WiFiUDP UDP;
 IPAddress ipMulti(239, 255, 255, 250);
 ESP8266WebServer HTTP(80);
@@ -33,10 +34,7 @@ char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
 String serial;
 String persistent_uuid;
 boolean cannotConnectToWifi = false;
-
-
-const char* mqtt_server = "192.168.1.200";
-
+// mptt defs
 WiFiClient espClient;
 PubSubClient client(espClient);
 unsigned long lastMsg = 0;
@@ -89,8 +87,6 @@ void reconnectMqtt() {
       Serial.println("connected");
       // Once connected, publish an announcement...
       client.publish("info", "I'm connected");
-      // ... and resubscribe
-      // client.subscribe(mqttTopic);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
