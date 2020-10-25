@@ -1,3 +1,9 @@
 # Aurora Alexa
 
-nodeMCU Client over mqtt for turn on/off all your aurora with Alexa.
+ESP8266 Client over mqtt for turn on/off all your aurora devices with Alexa.
+
+
+## Install
+
+This project is done on platformio, just is it's just a simple upload of the project. 
+Just make sure to change config values to your in 'main.cpp'
