@@ -12,8 +12,8 @@ Before do it so just make sure to change config values to your in 'main.cpp'
 
 #Related Projects:
 
-- (https://github.com/garhul/aurora)[aurora]
-- (https://github.com/sfabrizio/aurora-mqtt-server)[aurora-mqtt-server]
+- [aurora](https://github.com/garhul/aurora)
+- [aurora-mqtt-server](https://github.com/sfabrizio/aurora-mqtt-server)
 
 
 ## TODO:
@@ -21,4 +21,4 @@ Before do it so just make sure to change config values to your in 'main.cpp'
 - find a way to send effects and more parameters from Alexa. Now it's just an on/off with a hardcode effect. 
 
 
-Thanks to @garhul for (https://github.com/garhul/aurora)[aurora]
+Thanks to [@garhul](https://github.com/garhul)!
