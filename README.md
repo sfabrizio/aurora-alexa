@@ -10,7 +10,7 @@ This project is done on [platformio](https://platformio.org/), Follow the doc in
 With Platformio working is just a simple build & upload of the project. 
 Before do it so just make sure to change config values to your in 'main.cpp'
 
-#Related Projects:
+## Related Projects:
 
 - [aurora](https://github.com/garhul/aurora)
 - [aurora-mqtt-server](https://github.com/sfabrizio/aurora-mqtt-server)
