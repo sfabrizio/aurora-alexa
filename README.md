@@ -2,6 +2,10 @@
 
 ESP8266 Client over mqtt for turn on/off all your [aurora](https://github.com/garhul/aurora) devices with Alexa.
 
+# Demo
+
+[![aurora demo video](https://img.youtube.com/vi/mX4hph_eGeM/0.jpg)](http://www.youtube.com/watch?v=mX4hph_eGeM)
+
 
 ## Install
 
